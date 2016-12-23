@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.seo_title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="http://projects.sfchronicle.com/2016/holidays-restaurants/holidays-restaurants.css">
+    <script src="http://projects.sfchronicle.com/shared/js/jquery.min.js"></script> 
+  </head>
+
+
+<body>
+
+<!-- copy from here -->
+
+<div id="stick-here"></div>
+
+  <div class="timeline" id="timeline">
+
+    <% json.cowPalace.forEach(function(event,idx) { %>
+
+    <div class="block-group" id="<%= idx %>">
+        
+      <div class="block-name">
+        <div class="sticky-name">
+          <div class="block-yr"><%= event.headline %></div>
+          <div class="block-title"><%= event.day_month %>, <%= event.year %></div>
+        </div>
+      </div>
+      
+      <div class="block-content">
+        <div class="block-img">
+          <img src="http://ww1.hdnux.com/photos/51/21/44/<%= event.wcm_image_id %>/3/600x0.jpg"></img>
+        </div>
+        <div class="caption"><span class="byline"><%= event.photographer %></span></div> 
+        <div class="block-text"><%= event.text %></div>
+      </div>
+
+    </div>
+
+    <% }); %>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  $(window).scroll(function() {
+    
+  var window_top = document.body.scrollTop;
+  var div_top = document.getElementById('stick-here').getBoundingClientRect().top + window_top;
+  //   var timeline = document.getElementById('ticker');
+  var div_bottom = document.getElementById('15').getBoundingClientRect().bottom + window_top - 30;
+
+// need to change -- currently set for 10 items
+  for (var i = 0; i < 16; i++) {
+    var a = document.getElementById(i);
+    var at = document.getElementById(i);
+    if (i == 15) {
+      var ed_top = a.getBoundingClientRect().top + window_top - 100;
+      var ede_top = a.getBoundingClientRect().bottom + window_top - 135;
+    } else {
+      var ed_top = a.getBoundingClientRect().top + window_top - 100;
+      var ede_top = a.getBoundingClientRect().bottom + window_top - 100;
+    }
+
+    if (window_top > ed_top && window_top < ede_top) {
+      at.classList.add('active');
+      a.classList.add('active');
+    } else {
+      at.classList.remove('active');
+      a.classList.remove('active');
+    }
+  }
+});
+</script>
+
+<!-- copy up to here -->
+
+</body>
+</html>
